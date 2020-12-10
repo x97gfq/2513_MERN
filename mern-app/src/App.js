@@ -1,29 +1,37 @@
-//import logo from './logo.svg';
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Redirect, Switch, Route, Link } from 'react-router-dom'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import BookList from './components/Books.component'; 
+import Home from './Home';
 
 function App() {
-    const [weather, setWeather] = useState(null);
-    
-    const apiURL = "http://api.openweathermap.org/data/2.5/weather?id=6183858&appid=2ad263b9a82888fd39382d86aa2fc030&mode=json";
-
-    const fetchData = async () => {
-        const response = await axios.get(apiURL)
-        setWeather(response.data) 
-    }
-
-    useEffect(() => {
-      fetchData();
-    }, []);
-
     return (
-        <div className="App">
-          <h3>Weather</h3>
-          <div className="weather">
-            The weather in { (weather != null? weather.name : '') } is: { (weather != null ? weather.weather[0].description : 'none') } 
-          </div>
-        </div>
+        <Router>  
+            <div className="container">  
+                <nav className="navbar navbar-expand-lg navheader">  
+                    <div className="collapse navbar-collapse" >  
+                        <ul className="navbar-nav mr-auto">  
+                            <li className="nav-item">  
+                                <Link to={'/home'} className="nav-link">Home</Link>
+                            </li>  
+                            <li className="nav-item">  
+                                <Link to={'/BookList'} className="nav-link">Book List</Link>  
+                            </li>  
+                        </ul>  
+                    </div>  
+                </nav> 
+                <br />  
+                <Switch>  
+                    <Route exact path="/">
+                        <Redirect to="/home" />
+                    </Route>
+                    <Route exact path="/home" component={Home} />
+                    <Route path='/BookList' component={BookList} />  
+                </Switch>  
+            </div>
+        </Router>
     )
 }
 
