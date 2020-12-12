@@ -15,7 +15,7 @@ export default class Booklist extends Component {
 
   tabRow(){  
     return this.state.books.map(function(object, i){  
-        return <Table obj={object} key={i} onEditClick={this.EditBook}/>;  
+        return <Table obj={object} key={i} onEditClick={this.EditBook} onDeleteClick={this.DeleteBook}/>;  
     }, this);  
   } 
 
@@ -67,6 +67,11 @@ export default class Booklist extends Component {
 
   EditBook = (book) => {
     this.setState({ book: book, showForm: true, showAddButton: false })
+  }
+
+  DeleteBook = (book) => {
+    alert('Record deleted successfully!!');  
+    this.GetBooks();
   }
 
   UpdateValue = (val, propName) => {
