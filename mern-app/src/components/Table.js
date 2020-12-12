@@ -6,7 +6,6 @@ class Table extends Component {
   DeleteBook= () =>{  
     axios.delete('http://localhost:8080/book/'+this.props.obj._id)  
       .then(json => {  
-        debugger;
         if(json.data.Status==='Delete'){  
           alert('Record deleted successfully!!');  
       }  
