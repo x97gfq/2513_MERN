@@ -84,6 +84,8 @@ export default class Booklist extends Component {
       case 'published_year':
         book.published_year = val;
         break;
+      default:
+        break;
     }
     this.setState({ book: book })
   }
